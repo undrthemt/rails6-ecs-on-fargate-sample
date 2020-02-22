@@ -12,6 +12,7 @@ services:
       RAILS_MASTER_KEY: $RAILS_MASTER_KEY
       RAILS_SERVE_STATIC_FILES: "true"
       RAILS_LOG_TO_STDOUT: "true"
+      WEB_CONCURRENCY: $WEB_CONCURRENCY
       NODE_ENV: production
       # AWS RDSのデータベースを指定
       RDS_USERNAME: $RDS_USERNAME
