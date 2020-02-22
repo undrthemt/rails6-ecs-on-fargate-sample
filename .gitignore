@@ -87,4 +87,5 @@ yarn-debug.log*
 yarn-debug.log*
 .yarn-integrity
 
-/config/credentials/production.key
+# 実際の製品では含めてはいけません。
+#/config/credentials/production.key

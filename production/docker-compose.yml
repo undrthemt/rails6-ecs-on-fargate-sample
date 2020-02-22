@@ -1,0 +1,38 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: production/Dockerfile
+    stdin_open: true
+    tty: true
+    command: /bin/sh -c "./production/docker/after_volumes_mounted.sh && bundle exec puma -C config/puma.rb"
+    environment:
+      RAILS_ENV: production
+      RAILS_MASTER_KEY: $RAILS_MASTER_KEY
+      RAILS_SERVE_STATIC_FILES: "true"
+      RAILS_LOG_TO_STDOUT: "true"
+      NODE_ENV: production
+      # AWS RDSのデータベースを指定
+      RDS_USERNAME: $RDS_USERNAME
+      RDS_PASSWORD: $RDS_PASSWORD
+      RDS_HOSTNAME: $RDS_HOSTNAME
+      RDS_PORT: $RDS_PORT
+      RDS_DB_NAME: $RDS_DB_NAME
+    volumes:
+      - public:/app/public
+      - tmp:/app/tmp
+
+  nginx:
+    build: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - public:/app/public
+      - tmp:/app/tmp
+    depends_on:
+      - app
+
+volumes:
+  public:
+  tmp:

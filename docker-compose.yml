@@ -11,10 +11,10 @@ services:
       RAILS_ENV: $RAILS_ENV
       NODE_ENV: $RAILS_ENV
       BUNDLE_APP_CONFIG: ./.bundle
-      API_DB_USER: pguser
-      API_DB_PASS: pgpass
-      API_DB_HOST: postgres
-      API_DB_PORT: 5432
+      RDS_USERNAME: pguser
+      RDS_PASSWORD: pgpass
+      RDS_HOSTNAME: postgres
+      RDS_PORT: 5432
       REDIS_URL: redis://redis:6379
     volumes:
       - .:/var/www/app

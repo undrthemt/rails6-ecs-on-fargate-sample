@@ -1,4 +1,8 @@
 default: &default
+  username: <%= ENV["RDS_USERNAME"] || "postgres" %>
+  password: <%= ENV["RDS_PASSWORD"] || "" %>
+  host: <%= ENV["RDS_HOSTNAME"] || "localhost" %>
+  port: <%= ENV["RDS_PORT"] || 5432 %>
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -7,10 +11,6 @@ default: &default
 development:
   <<: *default
   database: dev-rails6-sample
-  username: <%= ENV["API_DB_USER"] || "postgres" %>
-  password: <%= ENV["API_DB_PASS"] || "" %>
-  host: <%= ENV["API_DB_HOST"] || "localhost" %>
-  port: <%= ENV["API_DB_PORT"] || 5432 %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -18,10 +18,6 @@ development:
 test:
   <<: *default
   database: test-rails6-sample
-  username: <%= ENV["API_DB_USER"] || "postgres" %>
-  password: <%= ENV["API_DB_PASS"] || "" %>
-  host: <%= ENV["API_DB_HOST"] || "localhost" %>
-  port: <%= ENV["API_DB_PORT"] || 5432 %>
 
 staging:
   <<: *default
@@ -29,4 +25,4 @@ staging:
 
 production:
   <<: *default
-  database: rails6-sample
+  database: <%= ENV["RDS_DB_NAME"] || 'rails6-sample' %>
