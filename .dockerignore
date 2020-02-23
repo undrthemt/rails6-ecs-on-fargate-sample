@@ -1,0 +1,7 @@
+# production/Dockerfile で使われています
+.git
+tmp
+log
+public/assets/*
+vendor/bundle
+node_modules
